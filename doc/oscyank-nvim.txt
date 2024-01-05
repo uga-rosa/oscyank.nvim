@@ -9,6 +9,7 @@ CONTENTS					*oscyank-nvim-contents*
 INTRODUCTION					|oscyank-nvim-introduction|
 MAPPINGS					|oscyank-nvim-mappings|
 COMMANDS					|oscyank-nvim-commands|
+CONFIGURATION					|oscyank-nvim-configuration|
 
 
 ==============================================================================
@@ -46,6 +47,32 @@ COMMANDS					*oscyank-nvim-commands*
 
 :OscYankRegister {reg}					*:OscYankRegister*
 	Copy text from register {reg}.
+
+
+==============================================================================
+CONFIGURATION					*oscyank-nvim-configuration*
+
+Set configurations via `setup` function.
+If the default settings are to be used as is, there is no need to call `setup`.
+>lua
+	require("oscyank").setup({
+	  max_length = 0,
+	  trim = false,
+	  osc52 = "\x1b]52;c;%s\x07",
+	})
+<
+
+max_length	(default: 0)		*oscyank-nvim-option-max_length*
+	The maximum length of a selection that can be copied at once. Set to
+	0 for unlimited length.
+
+trim	(default: false)			*oscyank-nvim-option-trim*
+	If true, remove leading and trailing whitespaces from a selection
+	before copying it. Indentation is preserved.
+
+osc52	(default: "\x1b]52;c;%s\x07")		*oscyank-nvim-option-osc52*
+	The OSC52 format string to use. The first `%s` specifier will be
+	replaced by the selection encoded in base64.
 
 
 ==============================================================================
