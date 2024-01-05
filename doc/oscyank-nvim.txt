@@ -1,0 +1,52 @@
+*oscyank-nvim.txt*				Lua port of vim-oscyank
+
+Author:  uga-rosa <uga6603@gmail.com>
+License: MIT License
+
+==============================================================================
+CONTENTS					*oscyank-nvim-contents*
+
+INTRODUCTION					|oscyank-nvim-introduction|
+MAPPINGS					|oscyank-nvim-mappings|
+COMMANDS					|oscyank-nvim-commands|
+
+
+==============================================================================
+INTRODUCTION					*oscyank-nvim-introduction*
+
+A Neovim plugin to copy text to the system clipboard using the ANSI OSC52
+sequence.
+
+The plugin wraps a piece of text inside an OSC52 sequence and writes it to
+Vim's stderr. If the terminal supports OSC52, it will then copy the text into
+the system clipboard.
+
+This is a Lua port of https://github.com/ojroques/vim-oscyank
+
+
+==============================================================================
+MAPPINGS					*oscyank-nvim-mappings*
+
+<Plug>(oscyank)						*<Plug>(oscyank)*
+	Defined in |Normal-mode| and |Visual-mode| (not |Select-mode|).
+	In normal mode, it behaves as a yank operator, in visual mode, it
+	yanks the selection range.
+>lua
+	vim.keymap.set({ "n", "x" }, "<Space>c", "<Plug>(oscyank)")
+	-- yank the current line
+	vim.keymap.set("n", "<Space>cc", "<Plug>(oscyank)_")
+<
+
+
+==============================================================================
+COMMANDS					*oscyank-nvim-commands*
+
+:OscYank {text}							*:OscYank*
+	Copy text {text}.
+
+:OscYankRegister {reg}					*:OscYankRegister*
+	Copy text from register {reg}.
+
+
+==============================================================================
+vim:tw=78:ts=8:noet:ft=help:norl:
